@@ -1,0 +1,33 @@
+.dashboardOuterContainer {
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.dashboardInnerContainer {
+  background-color: #413543;
+  color: #f0eb8d;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 600px;
+  box-shadow: 10px 10px;
+  padding: 1%;
+}
+.dashboardInnerContainer h2,
+h4 {
+  font-weight: bolder;
+  text-decoration: none;
+}
+.left {
+  align-self: flex-start;
+}
+.left a {
+  text-decoration: none;
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
