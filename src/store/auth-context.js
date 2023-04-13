@@ -23,7 +23,6 @@ export const useAuthContext = () => {
 
 export const AuthContextProvider = ({ children }) => {
   const [magic, setMagic] = useState(null);
-  const [metadata, setMetadata] = useState({});
   const auth = getAuth(app);
 
   useEffect(() => {
@@ -42,8 +41,6 @@ export const AuthContextProvider = ({ children }) => {
       jwt,
       providerId: process.env.REACT_APP_MAGIC_PROVIDER_ID,
     });
-    const metadata = await magic.user.getMetadata();
-    setMetadata(metadata);
   };
 
   const logInWithEmailAndPassword = async (email, password) => {
@@ -88,8 +85,8 @@ export const AuthContextProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        magic,
         auth,
-        metadata,
         getMagic,
         getToken,
         logInWithEmailAndPassword,
