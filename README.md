@@ -40,7 +40,7 @@ These instructions will get you a copy of the project up and running on your loc
 Stary by cloning this repo on your local machine:
 
 ```bash
-$ git clone git@github.com:ayv8er/MWS-Auth0-Demo.git
+$ git clone https://github.com/magiclabs/example-mws-firebase.git
 # or
 $ cd PROJECT
 ```
@@ -56,9 +56,9 @@ $ yarn add
 ## Serving the app
 
 ```bash
-$ npm run dev
+$ npm run start
 # or
-$ yarn dev
+$ yarn run
 ```
 
 ## Env setup
@@ -73,20 +73,22 @@ NEXT_PUBLIC_AUTH0_CLIENT_ID=
 NEXT_PUBLIC_AUTH0_SECRET_ID=
 ```
 
-## \_app.js
+## firebase.js
 
-In the Auth0Provider, pass values into the `domain` and `clientId` keys. Pass "http://localhost:3000" as value into `appOrigin` and `redirectUri`.
+Pass Firebase configs into `firebaseConfig` and initialize Firebase app
 
-## index.js
+## magic.js
 
-In the Magic constructor, pass env values into...
-
+Pass Magic publishable API key into client SDK constructor and initialize instance
 ```
 const magicClient = new Magic(<Magic_Publishable_API_Key>)
 ```
 
-In the Magic loginWithOIDC method, pass env values into...
+## auth-context.js
 
+Hold Magic client SDK instance and Firebase Auth instance into context
+
+In the Magic `loginWithOIDC` method (in `getMagic` function), pass values into...
 ```
 const did = await magic.openid.loginWithOIDC({
     jwt: <Auth0_User_ID_Token>,
