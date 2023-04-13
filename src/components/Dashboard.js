@@ -8,10 +8,11 @@ import useContractData from "../utils/useContractData";
 import "./dashboard.css";
 
 function Dashboard() {
-  const { auth, getMagic, getToken, metadata } = useAuthContext();
+  const { auth, getMagic, getToken, magic } = useAuthContext();
   const [user, loading] = useAuthState(auth);
   const [number, setNumber] = useState("");
   const [isNum, setIsNum] = useState(true);
+  const [metadata, setMetadata] = useState()
   const { caller, age } = useContractData();
   const balance = useEthBalance();
   const navigate = useNavigate();
@@ -19,8 +20,17 @@ function Dashboard() {
   useEffect(() => {
     if (!user) return navigate("/", { replace: true });
     getMagic();
+    getMetadata();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
+  const getMetadata = async () => {
+    const isUserLoggedIn = await magic.user.isLoggedIn();
+    if (isUserLoggedIn) {
+      const metadata = await magic.user.getMetadata();
+      setMetadata(metadata)
+    }
+  }
 
   const updateNewAge = async () => {
     if (isNaN(number) || !number) {
@@ -29,7 +39,7 @@ function Dashboard() {
       return;
     }
     try {
-      await AgeInstance.updateAge(+number, {});
+      await AgeInstance.updateAge(+number, { });
       setNumber("");
       setIsNum(true);
     } catch (err) {
@@ -58,7 +68,7 @@ function Dashboard() {
     <div className="dashboardOuterContainer">
       <div className="dashboardInnerContainer">
         <h2>{user.email}</h2>
-        {!balance || !metadata ? (
+        {!metadata || !balance ? (
           <h4>Loading...</h4>
         ) : (
           <>
