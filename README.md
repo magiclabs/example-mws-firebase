@@ -1,6 +1,6 @@
 # ReactJS Demo - Magic Wallet Services + Firebase Auth
 
-Deployed URL: [https://mws-firebase-demo.vercel.app/](https://mws-firebase-demo.vercel.app/)
+Deployed URL: [https://mws-firebase-demo.vercel.app/](https://mws-firebase.vercel.app/)
 
 ReactJS, Magic Web SDK and Firebase Auth
 Use Firebase Auth for user authentication, and Magic for wallet creation and key management.
@@ -90,7 +90,7 @@ Hold Magic client SDK instance and Firebase Auth instance into context
 
 In the Magic `loginWithOIDC` method (in `getMagic` function), pass values into...
 ```
-const did = await magic.openid.loginWithOIDC({
+const did = await magicClient.openid.loginWithOIDC({
     jwt: <Auth0_User_ID_Token>,
     providerId: <Magic_Provider_ID>
 })
